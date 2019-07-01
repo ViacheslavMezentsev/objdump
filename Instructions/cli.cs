@@ -1,33 +1,19 @@
 ﻿using System.Collections.Generic;
-using System.Text.RegularExpressions;
 
-
-namespace objdump.Instructions {
-
+namespace objdump.Instructions
+{
     // CLI - Clear Global Interrupt Flag.
     // 1001 0100 1111 1000
-    public class cli: IInstruction {
-
-        public OpInfo info;
-        public OpInfo OpInfo { get { return info; } }
-
-        public cli() { info = new OpInfo( "CLI", "Clear Global Interrupt Flag",
-            new Regex( @"1001010011111000", RegexOptions.Compiled ) ); }
-
-        public string Disassemble( List< Record > list, ref int counter ) { 
-        
+    public static class cli
+    {
+        public static string Disassemble( OpInfo opInfo, List< Record > list, ref int pc )
+        { 
             // Формируем ассемблерный вид команды.
+            var op = opInfo.Name.PadRight( Program.ArgumentsPad + Program.CommentsPad, ' ' );
 
-            // Название инструкции.
-            var op = info.Name.PadRight( Program.ArgumentsPad + Program.CommentsPad, ' ' );
-                
-            // Описание.
-            op += info.Description;
+            op += opInfo.Description;
                 
             return op;
-        
         }
-
     }
-
 }

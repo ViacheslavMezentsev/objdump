@@ -1,30 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 
-
-namespace objdump.Instructions {
-
+namespace objdump.Instructions
+{
     // RJMP - Relative Jump.
     // 1100 kkkk kkkk kkkk
-    public class rjmp: IInstruction {
-
-        public OpInfo info;
-        public OpInfo OpInfo { get { return info; } }
-
-        public rjmp() { info = new OpInfo( "RJMP", "Relative Jump",
-            new Regex( @"1100\d{12}", RegexOptions.Compiled ) ); }
-
-        public string Disassemble( List< Record > list, ref int counter ) {
-
+    public class rjmp
+    {
+        public static string Disassemble( OpInfo opInfo, List< Record > list, ref int pc )
+        {
             string op;
 
-            var item = list[ counter ];
+            var item = list[ pc ];
 
-            try {
-
+            try
+            {
                 // Преобразуем в двоичное представление.
                 var code = Convert.ToString( item.OpCode, 2 ).PadLeft( 16, '0' );
+
+                // Формируем ассемблерный вид команды.
+                op = opInfo.Name.PadRight( Program.ArgumentsPad, ' ' );
 
                 // Узнаём параметры инструкции.
                 // 0123 4567 8901 2345
@@ -32,38 +27,27 @@ namespace objdump.Instructions {
                 // PC <- PC + k + 1
                 uint k = Convert.ToUInt16( code.Substring( 4, 12 ), 2 );
 
-                // Формируем ассемблерный вид команды.
-
-                // Название инструкции.
-                op = info.Name.PadRight( Program.ArgumentsPad, ' ' );
-
-                // Параметры.
-                if ( ( k & ( 1 << 11 ) ) == 0 ) {
-
+                if ( ( k & ( 1 << 11 ) ) == 0 )
+                {
                     k = ( k + 1 ) << 1;
-                    op += String.Format( "$+{0:X4} ({1:X4})", k, item.Address + k ).PadRight( Program.CommentsPad, ' ' );
-
-                } else {
-
+                    op += $"$+{k:X4} ({item.Address + k:X4})".PadRight( Program.CommentsPad, ' ' );
+                }
+                else
+                {
                     k = ( ~k & 0xFFF ) << 1;
-                    op += String.Format( "$-{0:X4} ({1:X4})", k, item.Address - k ).PadRight( Program.CommentsPad, ' ' );
+                    op += $"$-{k:X4} ({item.Address - k:X4})".PadRight( Program.CommentsPad, ' ' );
                 }
 
-                // Описание.
-                op += info.Description;
-                
-            } catch( Exception ex ) {
-
-                // Отладочное сообщение в случае ошибки.
-                op = String.Format( "line: {0}, addr: ${1:X4}, opcode: ${2:X4} - {3}",
-                    item.LineNumber, item.Address, item.OpCode, ex.Message );
+                op += opInfo.Description;
+            }
+            catch ( Exception ex )
+            {
+                op = $"line: {item.LineNumber}, addr: ${item.Address:X4}, opcode: ${item.OpCode:X4} - {ex.Message}";
 
                 throw new Exception( op );
             }
 
             return op;
         }
-
     }
-
 }

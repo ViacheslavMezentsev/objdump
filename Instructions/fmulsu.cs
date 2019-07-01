@@ -1,27 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 
-
-namespace objdump.Instructions {
-
+namespace objdump.Instructions
+{
     // FMULSU - Fractional Multiply Signed with Unsigned.
     // 0000 0011 1ddd 1rrr
-    public class fmulsu: IInstruction {
-
-        public OpInfo info;
-        public OpInfo OpInfo { get { return info; } }
-
-        public fmulsu() { info = new OpInfo( "FMULSU", "Fractional Multiply Signed with Unsigned",
-            new Regex( @"000000111\d{3}1\d{3}", RegexOptions.Compiled ) ); }
-
-            public string Disassemble( List< Record > list, ref int counter ) {
-
+    public static class fmulsu
+    {
+        public static string Disassemble( OpInfo opInfo, List<Record> list, ref int pc )
+        {
             string op;
 
-            var item = list[ counter ];
+            var item = list[ pc ];
 
-            try {
+            try
+            {
+                // Формируем ассемблерный вид команды.
+                op = opInfo.Name.PadRight( Program.ArgumentsPad, ' ' );
 
                 // Преобразуем в двоичное представление.
                 var code = Convert.ToString( item.OpCode, 2 ).PadLeft( 16, '0' );
@@ -32,29 +27,18 @@ namespace objdump.Instructions {
                 var Rd = 16 + Convert.ToByte( code.Substring( 9, 3 ), 2 );
                 var Rr = 16 + Convert.ToByte( code.Substring( 13, 3 ), 2 );
 
-                // Формируем ассемблерный вид команды.
+                op += $"R{Rd}, R{Rr}".PadRight( Program.CommentsPad, ' ' );
 
-                // Название инструкции.
-                op = info.Name.PadRight( Program.ArgumentsPad, ' ' );
-
-                // Параметры.
-                op += String.Format( "R{0}, R{1}", Rd, Rr ).PadRight( Program.CommentsPad, ' ' );
-
-                // Описание.
-                op += info.Description;
-
-            } catch( Exception ex ) {
-
-                // Отладочное сообщение в случае ошибки.
-                op = String.Format( "line: {0}, addr: ${1:X4}, opcode: ${2:X4} - {3}",
-                    item.LineNumber, item.Address, item.OpCode, ex.Message );
+                op += opInfo.Description;
+            }
+            catch ( Exception ex )
+            {
+                op = $"line: {item.LineNumber}, addr: ${item.Address:X4}, opcode: ${item.OpCode:X4} - {ex.Message}";
 
                 throw new Exception( op );
             }
 
             return op;
         }
-
     }
-
 }

@@ -1,59 +1,43 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 
-
-namespace objdump.Instructions {
-
+namespace objdump.Instructions
+{
     // ST - Store Indirect From Register to Data Space using Index X.
     // 1001 001r rrrr 1101
-    public class stxp: IInstruction {
-
-        public OpInfo info;
-        public OpInfo OpInfo { get { return info; } }
-
-        public stxp() { info = new OpInfo( "ST", "Store Indirect From Register to Data Space using Index X",
-            new Regex( @"1001001\d{5}1101", RegexOptions.Compiled ) ); }
-
-        public string Disassemble( List< Record > list, ref int counter ) {
-
+    public static class stxp
+    {
+        public static string Disassemble( OpInfo opInfo, List< Record > list, ref int pc )
+        {
             string op;
 
-            var item = list[ counter ];
+            var item = list[ pc ];
 
-            try {
-
+            try
+            {
                 // Преобразуем в двоичное представление.
                 var code = Convert.ToString( item.OpCode, 2 ).PadLeft( 16, '0' );
+
+                // Формируем ассемблерный вид команды.
+                op = opInfo.Name.PadRight( Program.ArgumentsPad, ' ' );
 
                 // Узнаём параметры инструкции.
                 // 0123 4567 8901 2345
                 // 1001 001r rrrr 1101
                 var Rr = Convert.ToByte( code.Substring( 7, 5 ), 2 );
 
-                // Формируем ассемблерный вид команды.
+                op += $"X+, R{Rr}".PadRight( Program.CommentsPad, ' ' );
 
-                // Название инструкции.
-                op = info.Name.PadRight( Program.ArgumentsPad, ' ' );
-
-                // Параметры.
-                op += String.Format( "X+, R{0}", Rr ).PadRight( Program.CommentsPad, ' ' );
-
-                // Описание.
-                op += info.Description;
-
-            } catch( Exception ex ) {
-
-                // Отладочное сообщение в случае ошибки.
-                op = String.Format( "line: {0}, addr: ${1:X4}, opcode: ${2:X4} - {3}",
-                    item.LineNumber, item.Address, item.OpCode, ex.Message );
+                op += opInfo.Description;
+            }
+            catch ( Exception ex )
+            {
+                op = $"line: {item.LineNumber}, addr: ${item.Address:X4}, opcode: ${item.OpCode:X4} - {ex.Message}";
 
                 throw new Exception( op );
             }
 
             return op;
         }
-
     }
-
 }

@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
@@ -8,9 +7,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle( "objdump" )]
 [assembly: AssemblyDescription( "objdump for AVR Object File" )]
 [assembly: AssemblyConfiguration( "" )]
-[assembly: AssemblyCompany( "Viacheslav N. Mezentsev (viacheslavmezentsev@gmail.com)" )]
+[assembly: AssemblyCompany( "Viacheslav N. Mezentsev (viacheslavmezentsev@ya.ru)" )]
 [assembly: AssemblyProduct( "objdump" )]
-[assembly: AssemblyCopyright( "Copyright © Viacheslav N. Mezentsev 2013" )]
+[assembly: AssemblyCopyright( "Copyright © Viacheslav N. Mezentsev 2013-2019" )]
 [assembly: AssemblyTrademark( "" )]
 [assembly: AssemblyCulture( "" )]
 
@@ -32,4 +31,4 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion( "0.1.*" )]
+[assembly: AssemblyVersion( "0.2.*" )]
