@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FB365C2E-767E-4DAD-BC9A-2DC0B436F76F}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>objdump</RootNamespace>
+    <AssemblyName>objdump</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Debug\objdump.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Release\objdump.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="EndianAwareBinaryReader.cs" />
+    <Compile Include="Instructions\adc.cs" />
+    <Compile Include="Instructions\add.cs" />
+    <Compile Include="Instructions\adiw.cs" />
+    <Compile Include="Instructions\and.cs" />
+    <Compile Include="Instructions\andi.cs" />
+    <Compile Include="Instructions\asr.cs" />
+    <Compile Include="Instructions\bclr.cs" />
+    <Compile Include="Instructions\bld.cs" />
+    <Compile Include="Instructions\brbc.cs" />
+    <Compile Include="Instructions\brbs.cs" />
+    <Compile Include="Instructions\brcc.cs" />
+    <Compile Include="Instructions\brcs.cs" />
+    <Compile Include="Instructions\break.cs" />
+    <Compile Include="Instructions\breq.cs" />
+    <Compile Include="Instructions\brge.cs" />
+    <Compile Include="Instructions\brhc.cs" />
+    <Compile Include="Instructions\brhs.cs" />
+    <Compile Include="Instructions\brid.cs" />
+    <Compile Include="Instructions\brie.cs" />
+    <Compile Include="Instructions\brlo.cs" />
+    <Compile Include="Instructions\brlt.cs" />
+    <Compile Include="Instructions\brmi.cs" />
+    <Compile Include="Instructions\brne.cs" />
+    <Compile Include="Instructions\brpl.cs" />
+    <Compile Include="Instructions\brsh.cs" />
+    <Compile Include="Instructions\brtc.cs" />
+    <Compile Include="Instructions\brts.cs" />
+    <Compile Include="Instructions\brvc.cs" />
+    <Compile Include="Instructions\brvs.cs" />
+    <Compile Include="Instructions\bst.cs" />
+    <Compile Include="Instructions\call.cs" />
+    <Compile Include="Instructions\cbi.cs" />
+    <Compile Include="Instructions\cbr.cs" />
+    <Compile Include="Instructions\clc.cs" />
+    <Compile Include="Instructions\clh.cs" />
+    <Compile Include="Instructions\cli.cs" />
+    <Compile Include="Instructions\cln.cs" />
+    <Compile Include="Instructions\clr.cs" />
+    <Compile Include="Instructions\cls.cs" />
+    <Compile Include="Instructions\clt.cs" />
+    <Compile Include="Instructions\clv.cs" />
+    <Compile Include="Instructions\clz.cs" />
+    <Compile Include="Instructions\com.cs" />
+    <Compile Include="Instructions\cp.cs" />
+    <Compile Include="Instructions\cpc.cs" />
+    <Compile Include="Instructions\cpi.cs" />
+    <Compile Include="Instructions\cpse.cs" />
+    <Compile Include="Instructions\dec.cs" />
+    <Compile Include="Instructions\des.cs" />
+    <Compile Include="Instructions\eicall.cs" />
+    <Compile Include="Instructions\eijmp.cs" />
+    <Compile Include="Instructions\elpm.cs" />
+    <Compile Include="Instructions\elpmz.cs" />
+    <Compile Include="Instructions\elpmzp.cs" />
+    <Compile Include="Instructions\eor.cs" />
+    <Compile Include="Instructions\fmul.cs" />
+    <Compile Include="Instructions\fmuls.cs" />
+    <Compile Include="Instructions\fmulsu.cs" />
+    <Compile Include="Instructions\icall.cs" />
+    <Compile Include="Instructions\ijmp.cs" />
+    <Compile Include="Instructions\in.cs" />
+    <Compile Include="Instructions\inc.cs" />
+    <Compile Include="Instructions\jmp.cs" />
+    <Compile Include="Instructions\lac.cs" />
+    <Compile Include="Instructions\las.cs" />
+    <Compile Include="Instructions\lat.cs" />
+    <Compile Include="Instructions\lddy.cs" />
+    <Compile Include="Instructions\lddz.cs" />
+    <Compile Include="Instructions\ldi.cs" />
+    <Compile Include="Instructions\ldmx.cs" />
+    <Compile Include="Instructions\ldmy.cs" />
+    <Compile Include="Instructions\ldmz.cs" />
+    <Compile Include="Instructions\lds16.cs" />
+    <Compile Include="Instructions\lds32.cs" />
+    <Compile Include="Instructions\ldx.cs" />
+    <Compile Include="Instructions\ldxp.cs" />
+    <Compile Include="Instructions\ldy.cs" />
+    <Compile Include="Instructions\ldyp.cs" />
+    <Compile Include="Instructions\ldz.cs" />
+    <Compile Include="Instructions\ldzp.cs" />
+    <Compile Include="Instructions\lpm.cs" />
+    <Compile Include="Instructions\lpmz.cs" />
+    <Compile Include="Instructions\lpmzp.cs" />
+    <Compile Include="Instructions\lsl.cs" />
+    <Compile Include="Instructions\lsr.cs" />
+    <Compile Include="Instructions\mov.cs" />
+    <Compile Include="Instructions\movw.cs" />
+    <Compile Include="Instructions\mul.cs" />
+    <Compile Include="Instructions\muls.cs" />
+    <Compile Include="Instructions\mulsu.cs" />
+    <Compile Include="Instructions\neg.cs" />
+    <Compile Include="Instructions\nop.cs" />
+    <Compile Include="Instructions\or.cs" />
+    <Compile Include="Instructions\ori.cs" />
+    <Compile Include="Instructions\out.cs" />
+    <Compile Include="Instructions\pop.cs" />
+    <Compile Include="Instructions\push.cs" />
+    <Compile Include="Instructions\rcall.cs" />
+    <Compile Include="Instructions\ret.cs" />
+    <Compile Include="Instructions\reti.cs" />
+    <Compile Include="Instructions\rjmp.cs" />
+    <Compile Include="Instructions\rol.cs" />
+    <Compile Include="Instructions\ror.cs" />
+    <Compile Include="Instructions\sbc.cs" />
+    <Compile Include="Instructions\sbci.cs" />
+    <Compile Include="Instructions\sbi.cs" />
+    <Compile Include="Instructions\sbic.cs" />
+    <Compile Include="Instructions\sbis.cs" />
+    <Compile Include="Instructions\sbiw.cs" />
+    <Compile Include="Instructions\sbr.cs" />
+    <Compile Include="Instructions\sbrc.cs" />
+    <Compile Include="Instructions\sbrs.cs" />
+    <Compile Include="Instructions\sec.cs" />
+    <Compile Include="Instructions\seh.cs" />
+    <Compile Include="Instructions\sei.cs" />
+    <Compile Include="Instructions\sen.cs" />
+    <Compile Include="Instructions\ser.cs" />
+    <Compile Include="Instructions\ses.cs" />
+    <Compile Include="Instructions\set.cs" />
+    <Compile Include="Instructions\sev.cs" />
+    <Compile Include="Instructions\sez.cs" />
+    <Compile Include="Instructions\sleep.cs" />
+    <Compile Include="Instructions\spm.cs" />
+    <Compile Include="Instructions\spmzp.cs" />
+    <Compile Include="Instructions\stdy.cs" />
+    <Compile Include="Instructions\stdz.cs" />
+    <Compile Include="Instructions\stmx.cs" />
+    <Compile Include="Instructions\stmy.cs" />
+    <Compile Include="Instructions\stmz.cs" />
+    <Compile Include="Instructions\sts16.cs" />
+    <Compile Include="Instructions\sts32.cs" />
+    <Compile Include="Instructions\stx.cs" />
+    <Compile Include="Instructions\stxp.cs" />
+    <Compile Include="Instructions\sty.cs" />
+    <Compile Include="Instructions\styp.cs" />
+    <Compile Include="Instructions\stz.cs" />
+    <Compile Include="Instructions\stzp.cs" />
+    <Compile Include="Instructions\sub.cs" />
+    <Compile Include="Instructions\subi.cs" />
+    <Compile Include="Instructions\swap.cs" />
+    <Compile Include="Instructions\tst.cs" />
+    <Compile Include="Instructions\wdr.cs" />
+    <Compile Include="Instructions\xch.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
